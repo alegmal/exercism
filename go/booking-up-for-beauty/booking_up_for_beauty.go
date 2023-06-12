@@ -1,15 +1,26 @@
 package booking
 
-import "time"
+import (
+	"fmt"
+	"time"
+)
 
 // Schedule returns a time.Time from a string containing a date.
 func Schedule(date string) time.Time {
-	panic("Please implement the Schedule function")
+	t, _ := time.Parse("1/02/2006 15:04:05", date)
+
+	return t
 }
 
 // HasPassed returns whether a date has passed.
 func HasPassed(date string) bool {
-	panic("Please implement the HasPassed function")
+	const layout = "January 2, 2006 15:04:05"
+	t, err := time.Parse(layout, date)
+	if err != nil {
+		fmt.Println(err)
+		return false
+	}
+	return time.Now().After(t)
 }
 
 // IsAfternoonAppointment returns whether a time is in the afternoon.
